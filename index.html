@@ -41,7 +41,7 @@ body { padding: 28px 36px 60px; max-width: 1400px; margin: 0 auto; }
 /* === Header === */
 .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
 .brand { display: flex; gap: 14px; align-items: center; }
-.brand-mark { width: 44px; height: 44px; background: var(--teal); border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-size: 22px; font-weight: 600; }
+.brand-mark { width: 48px; height: 48px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
 .brand-text h1 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
 .brand-text .subtitle { color: var(--ink-soft); font-size: 13px; margin-top: 2px; }
 .meta { font-size: 12px; color: var(--ink-soft); text-align: right; line-height: 1.65; }
@@ -107,21 +107,48 @@ table.data tr:hover td { background: var(--line-soft); }
 
 /* === HPS vs Market comparison cards === */
 .compare-controls { display: flex; gap: 14px; margin-bottom: 18px; align-items: center; flex-wrap: wrap; }
-.compare-cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
-.compare-card { background: var(--card); border-radius: var(--r); box-shadow: var(--shadow); padding: 18px 20px; }
-.compare-card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 0.5px solid var(--line); }
-.compare-card-head .title { font-size: 16px; font-weight: 600; font-family: var(--font-display); }
-.compare-card-head .sub { font-size: 12px; color: var(--ink-soft); }
-.compare-grid { display: grid; grid-template-columns: 100px 1fr 1fr 1fr; gap: 8px 14px; font-size: 13px; align-items: center; }
-.compare-grid .h-row { font-family: var(--font-narrow); text-transform: uppercase; letter-spacing: 0.04em; font-size: 11px; color: var(--ink-faint); font-weight: 500; padding-bottom: 6px; }
-.compare-grid .metric-label { color: var(--ink-soft); font-size: 12.5px; }
-.compare-grid .val { font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 500; }
-.compare-grid .gap { font-variant-numeric: tabular-nums; font-family: var(--font-narrow); font-size: 13px; font-weight: 500; }
-.compare-grid .gap.pos { color: var(--pos); }
-.compare-grid .gap.neg { color: var(--neg); }
-.compare-grid .gap.neu { color: var(--ink-soft); }
-.read-line { margin-top: 12px; padding-top: 12px; border-top: 0.5px dashed var(--line); font-size: 12.5px; color: var(--ink); line-height: 1.55; }
-.read-line b { font-weight: 600; }
+/* === HPS vs Market scorecard view === */
+.compare-summary { background: var(--card); border-radius: var(--r); padding: 18px 22px; box-shadow: var(--shadow); margin-bottom: 18px; }
+.compare-summary .summary-h { font-family: var(--font-narrow); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; color: var(--ink-faint); margin-bottom: 12px; font-weight: 500; }
+.compare-summary .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.compare-summary .stat { padding: 12px 14px; background: var(--bg); border-radius: var(--r-sm); cursor: pointer; transition: background 0.12s; border: 0.5px solid transparent; }
+.compare-summary .stat:hover { background: var(--line-soft); border-color: var(--line); }
+.compare-summary .stat.active { background: var(--teal-bg); border-color: var(--teal); }
+.compare-summary .stat .stat-label { font-family: var(--font-narrow); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 4px; font-weight: 500; }
+.compare-summary .stat .stat-val { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.compare-summary .stat .stat-val.pos { color: var(--pos); }
+.compare-summary .stat .stat-val.neg { color: var(--neg); }
+.compare-summary .stat .stat-sub { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+.compare-summary .summary-narrative { font-size: 13px; color: var(--ink); line-height: 1.55; margin-top: 14px; padding-top: 14px; border-top: 0.5px dashed var(--line); }
+.compare-summary .summary-narrative b { font-weight: 600; }
+.compare-filter-banner { font-size: 12px; color: var(--ink-soft); margin: 12px 0 6px; padding: 8px 12px; background: var(--gold-bg); border-radius: var(--r-sm); display: none; align-items: center; justify-content: space-between; }
+.compare-filter-banner.shown { display: flex; }
+.compare-filter-banner button { background: transparent; border: 0; color: var(--gold); font-family: inherit; font-size: 12px; cursor: pointer; padding: 2px 6px; font-weight: 500; }
+.compare-filter-banner button:hover { text-decoration: underline; }
+
+.compare-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+
+.scorecard-table { background: var(--card); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; }
+.scorecard-head { display: grid; grid-template-columns: 280px repeat(4, 1fr); padding: 10px 16px; background: var(--bg); border-bottom: 1px solid var(--line); font-family: var(--font-narrow); text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; color: var(--ink-soft); font-weight: 500; gap: 12px; }
+.scorecard-head .col { text-align: center; cursor: pointer; user-select: none; }
+.scorecard-head .col:hover { color: var(--ink); }
+.scorecard-head .col.seg-col { text-align: left; }
+.scorecard-row { display: grid; grid-template-columns: 280px repeat(4, 1fr); padding: 12px 16px; border-bottom: 0.5px solid var(--line-soft); gap: 12px; align-items: center; }
+.scorecard-row:last-child { border-bottom: 0; }
+.scorecard-row:hover { background: var(--line-soft); }
+.scorecard-row .seg-cell { padding-right: 8px; }
+.scorecard-row .seg-name { font-size: 13.5px; font-weight: 500; line-height: 1.3; }
+.scorecard-row .seg-compared { font-size: 10.5px; color: var(--ink-faint); margin-top: 3px; font-family: var(--font-narrow); }
+.scorecard-row .seg-tag { display: inline-block; font-size: 9.5px; padding: 1.5px 5px; border-radius: 3px; font-family: var(--font-narrow); margin-left: 6px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; background: var(--bg); color: var(--ink-soft); vertical-align: middle; }
+.scorecard-cell { text-align: center; padding: 6px 4px; border-radius: var(--r-sm); }
+.scorecard-cell.pos { background: var(--pos-bg); }
+.scorecard-cell.neg { background: var(--neg-bg); }
+.scorecard-cell.neu { background: transparent; }
+.scorecard-cell .gap-val { font-family: var(--font-narrow); font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 600; }
+.scorecard-cell.pos .gap-val { color: var(--pos); }
+.scorecard-cell.neg .gap-val { color: var(--neg); }
+.scorecard-cell.neu .gap-val { color: var(--ink-faint); }
+.scorecard-cell .gap-detail { font-size: 10.5px; color: var(--ink-soft); margin-top: 2px; font-variant-numeric: tabular-nums; }
 
 /* === Action cards (Pricing) === */
 .action-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 14px; margin-bottom: 28px; }
@@ -162,9 +189,10 @@ table.data tr:hover td { background: var(--line-soft); }
 .entity-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(29,31,26,0.06), 0 0 0 0.5px rgba(29,31,26,0.1); }
 .entity-card .name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 .entity-card .count { font-size: 11px; color: var(--ink-soft); margin-bottom: 10px; font-family: var(--font-narrow); text-transform: uppercase; letter-spacing: 0.04em; }
-.entity-card .mini-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; font-size: 11px; }
+.entity-card .mini-kpis { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 11.5px; align-items: baseline; }
 .entity-card .mini-kpis .l { color: var(--ink-soft); }
-.entity-card .mini-kpis .v { font-weight: 500; font-variant-numeric: tabular-nums; }
+.entity-card .mini-kpis .v { font-weight: 500; font-variant-numeric: tabular-nums; display: flex; gap: 6px; align-items: baseline; }
+.entity-card .mini-kpis .v .yoy { font-family: var(--font-narrow); font-size: 10.5px; font-weight: 500; }
 
 /* === Detail drawer === */
 .detail-drawer { display: none; background: var(--card); border-radius: var(--r); box-shadow: var(--shadow); padding: 20px 22px; margin-top: 14px; }
@@ -193,7 +221,7 @@ table.data tr:hover td { background: var(--line-soft); }
 
 <header class="header">
   <div class="brand">
-    <div class="brand-mark">P</div>
+    <div class="brand-mark">HPS</div>
     <div class="brand-text">
       <h1>Happy Palm Stays</h1>
       <div class="subtitle">Revenue Intelligence · Space Coast Portfolio</div>
@@ -362,20 +390,40 @@ table.data tr:hover td { background: var(--line-soft); }
   <div class="detail-drawer" id="owner-detail"></div>
 </section>
 
-<!-- === HPS vs Market (NEW) === -->
+<!-- === HPS vs Market (scorecard) === -->
 <section class="view" id="view-compare">
   <div class="section-head">
     <h2>HPS vs Market</h2>
-    <span class="note">Where the revenue decision lives. 23 comparison cards.</span>
+    <span class="note" id="compare-note">Where HPS beats or trails the comp set, by segment</span>
   </div>
+
+  <div class="compare-summary" id="compare-summary"></div>
+
+  <div class="compare-filter-banner" id="compare-filter-banner">
+    <span id="compare-filter-label"></span>
+    <button id="compare-filter-clear">Clear filter ✕</button>
+  </div>
+
   <div class="compare-controls">
     <select id="compare-sort">
-      <option value="opportunity">Biggest opportunity (largest negative gap)</option>
-      <option value="win">Biggest win (largest positive gap)</option>
-      <option value="category">By category (Houses, Condos, by bed)</option>
+      <option value="revpar-best">Sort by RevPAR gap (HPS ahead first)</option>
+      <option value="revpar-worst">Sort by RevPAR gap (HPS behind first)</option>
+      <option value="occ-best">Sort by Occupancy gap (HPS ahead first)</option>
+      <option value="alpha">Sort alphabetically</option>
     </select>
+    <input type="text" id="compare-search" placeholder="Filter segments…" style="padding: 6px 10px; border: 0.5px solid var(--line); border-radius: var(--r-sm); font-family: inherit; font-size: 13px; background: var(--card); color: var(--ink); width: 220px;">
   </div>
-  <div class="compare-cards" id="compare-cards"></div>
+
+  <div class="scorecard-table">
+    <div class="scorecard-head">
+      <div class="col seg-col">Segment</div>
+      <div class="col">ADR vs Market</div>
+      <div class="col">Occ vs Market</div>
+      <div class="col">RevPAR vs Market</div>
+      <div class="col">LoS vs Market</div>
+    </div>
+    <div id="scorecard-body"></div>
+  </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -945,13 +993,38 @@ function getUnitsByOSM(osm) {
 }
 function aggUnits(units, w) {
   const valid = units.filter(u => u[`${w}_ADR_2026`] != null);
-  if (valid.length === 0) return {adr:null, occ:null, rev:null, n:0};
-  const sum = (k) => valid.reduce((s,u) => s + (u[k] || 0), 0);
+  if (valid.length === 0) return {adr:null, occ:null, rev:null, n:0, adrY:null, occY:null, revY:null, sameStoreN:0};
+  // Same-store YoY: average current and prior using only units with a non-zero, non-null prior.
+  // This avoids new-listing distortion where units have $0 prior and inflate the YoY.
+  const sumPair = (mKey) => {
+    const pair = valid.filter(u =>
+      u[`${w}_${mKey}_2026`] != null &&
+      u[`${w}_${mKey}_2025`] != null &&
+      u[`${w}_${mKey}_2025`] > 0
+    );
+    if (pair.length === 0) return { cur: null, prior: null, n: 0 };
+    const cur   = pair.reduce((s,u) => s + u[`${w}_${mKey}_2026`], 0) / pair.length;
+    const prior = pair.reduce((s,u) => s + u[`${w}_${mKey}_2025`], 0) / pair.length;
+    return { cur, prior, n: pair.length };
+  };
+  // Current value (all units with current data, not just same-store)
+  const sumCur = (mKey) => {
+    const has = valid.filter(u => u[`${w}_${mKey}_2026`] != null);
+    return has.length ? has.reduce((s,u) => s + u[`${w}_${mKey}_2026`], 0) / has.length : null;
+  };
+  const adrP = sumPair('ADR');
+  const occP = sumPair('Occ');
+  const revP = sumPair('RevPAR');
+  const yoy = (cur, prior) => (prior == null || prior === 0 || cur == null) ? null : (cur - prior) / prior * 100;
   return {
-    adr: sum(`${w}_ADR_2026`) / valid.length,
-    occ: sum(`${w}_Occ_2026`) / valid.length,
-    rev: sum(`${w}_RevPAR_2026`) / valid.length,
+    adr:  sumCur('ADR'),
+    occ:  sumCur('Occ'),
+    rev:  sumCur('RevPAR'),
+    adrY: yoy(adrP.cur, adrP.prior),
+    occY: yoy(occP.cur, occP.prior),
+    revY: yoy(revP.cur, revP.prior),
     n: valid.length,
+    sameStoreN: Math.max(adrP.n, occP.n, revP.n),  // size of the same-store comparison
   };
 }
 function renderOSM() {
@@ -959,14 +1032,15 @@ function renderOSM() {
   const cards = DATA.meta.osm_roster.map(osm => {
     const units = getUnitsByOSM(osm);
     const agg = aggUnits(units, w);
+    const ssNote = agg.sameStoreN > 0 ? `<span style="color: var(--ink-faint); font-weight: 400;"> &middot; ${agg.sameStoreN} same-store</span>` : '';
     return `<div class="entity-card" onclick="showOSMDetail('${osm.replace(/'/g, "\\'")}')">
       <div class="name">${osm}</div>
       <div class="count">${units.length} units</div>
       <div class="mini-kpis">
-        <div class="l">ADR</div><div class="v">${fmtMoney(agg.adr)}</div>
-        <div class="l">Occ</div><div class="v">${fmtPct(agg.occ)}</div>
-        <div class="l">RevPAR</div><div class="v">${fmtMoney(agg.rev)}</div>
-        <div class="l">Active</div><div class="v">${agg.n}/${units.length}</div>
+        <div class="l">ADR</div><div class="v">${fmtMoney(agg.adr)} ${fmtYoY(agg.adrY)}</div>
+        <div class="l">Occ</div><div class="v">${fmtPct(agg.occ)} ${fmtYoY(agg.occY)}</div>
+        <div class="l">RevPAR</div><div class="v">${fmtMoney(agg.rev)} ${fmtYoY(agg.revY)}</div>
+        <div class="l">Active</div><div class="v">${agg.n}/${units.length}${ssNote}</div>
       </div>
     </div>`;
   }).join('');
@@ -984,10 +1058,10 @@ function showOSMDetail(osm) {
       <button class="close-btn" onclick="document.getElementById('osm-detail').classList.remove('open')">Close ✕</button>
     </div>
     <div class="kpi-grid" style="margin-bottom: 18px;">
-      <div class="kpi"><div class="label">Avg ADR</div><div class="value">${fmtMoney(agg.adr)}</div></div>
-      <div class="kpi coral"><div class="label">Avg Occupancy</div><div class="value">${fmtPct(agg.occ)}</div></div>
-      <div class="kpi gold"><div class="label">Avg RevPAR</div><div class="value">${fmtMoney(agg.rev)}</div></div>
-      <div class="kpi neu"><div class="label">Active Units</div><div class="value">${agg.n}/${units.length}</div></div>
+      <div class="kpi"><div class="label">Avg ADR</div><div class="value">${fmtMoney(agg.adr)}</div><div class="footer">${fmtYoY(agg.adrY)} year over year</div></div>
+      <div class="kpi coral"><div class="label">Avg Occupancy</div><div class="value">${fmtPct(agg.occ)}</div><div class="footer">${fmtYoY(agg.occY)} year over year</div></div>
+      <div class="kpi gold"><div class="label">Avg RevPAR</div><div class="value">${fmtMoney(agg.rev)}</div><div class="footer">${fmtYoY(agg.revY)} year over year</div></div>
+      <div class="kpi neu"><div class="label">Active Units</div><div class="value">${agg.n}/${units.length}</div><div class="footer">${units.length - agg.n} with no current data</div></div>
     </div>
     <table class="data">
       <thead><tr><th>Unit</th><th class="num">ADR</th><th class="num">Occ</th><th class="num">RevPAR</th><th class="num">YoY RevPAR</th></tr></thead>
@@ -1012,14 +1086,15 @@ function renderOwner() {
     const active = units.filter(u => u.has_keydata_data !== false);
     const stale = units.filter(u => u.has_keydata_data === false);
     const agg = aggUnits(active, w);
+    const ssNote = agg.sameStoreN > 0 ? `<span style="color: var(--ink-faint); font-weight: 400;"> &middot; ${agg.sameStoreN} same-store</span>` : '';
     return `<div class="entity-card" onclick="showOwnerDetail('${owner}')">
       <div class="name">${owner}</div>
-      <div class="count">${units.length} units${stale.length ? ` · ${stale.length} stale` : ''}</div>
+      <div class="count">${units.length} units${stale.length ? ` &middot; ${stale.length} stale` : ''}</div>
       <div class="mini-kpis">
-        <div class="l">ADR</div><div class="v">${fmtMoney(agg.adr)}</div>
-        <div class="l">Occ</div><div class="v">${fmtPct(agg.occ)}</div>
-        <div class="l">RevPAR</div><div class="v">${fmtMoney(agg.rev)}</div>
-        <div class="l">Active</div><div class="v">${agg.n}/${units.length}</div>
+        <div class="l">ADR</div><div class="v">${fmtMoney(agg.adr)} ${fmtYoY(agg.adrY)}</div>
+        <div class="l">Occ</div><div class="v">${fmtPct(agg.occ)} ${fmtYoY(agg.occY)}</div>
+        <div class="l">RevPAR</div><div class="v">${fmtMoney(agg.rev)} ${fmtYoY(agg.revY)}</div>
+        <div class="l">Active</div><div class="v">${agg.n}/${units.length}${ssNote}</div>
       </div>
     </div>`;
   }).join('');
@@ -1043,10 +1118,10 @@ function showOwnerDetail(owner) {
       <button class="close-btn" onclick="document.getElementById('owner-detail').classList.remove('open')">Close ✕</button>
     </div>
     <div class="kpi-grid" style="margin-bottom: 18px;">
-      <div class="kpi"><div class="label">Avg ADR</div><div class="value">${fmtMoney(agg.adr)}</div></div>
-      <div class="kpi coral"><div class="label">Avg Occupancy</div><div class="value">${fmtPct(agg.occ)}</div></div>
-      <div class="kpi gold"><div class="label">Avg RevPAR</div><div class="value">${fmtMoney(agg.rev)}</div></div>
-      <div class="kpi neu"><div class="label">Active Units</div><div class="value">${agg.n}/${units.length}</div></div>
+      <div class="kpi"><div class="label">Avg ADR</div><div class="value">${fmtMoney(agg.adr)}</div><div class="footer">${fmtYoY(agg.adrY)} year over year</div></div>
+      <div class="kpi coral"><div class="label">Avg Occupancy</div><div class="value">${fmtPct(agg.occ)}</div><div class="footer">${fmtYoY(agg.occY)} year over year</div></div>
+      <div class="kpi gold"><div class="label">Avg RevPAR</div><div class="value">${fmtMoney(agg.rev)}</div><div class="footer">${fmtYoY(agg.revY)} year over year</div></div>
+      <div class="kpi neu"><div class="label">Active Units</div><div class="value">${agg.n}/${units.length}</div><div class="footer">${units.length - agg.n} with no current data</div></div>
     </div>
     <table class="data">
       <thead><tr><th>Unit</th><th class="num">ADR</th><th class="num">Occ</th><th class="num">RevPAR</th><th class="num">YoY RevPAR</th><th>Status</th></tr></thead>
@@ -1064,153 +1139,260 @@ function showOwnerDetail(owner) {
   drawer.scrollIntoView({behavior: 'smooth', block: 'nearest'});
 }
 
-// === HPS vs Market (NEW) ===
+// === HPS vs Market scorecard ===
+// Pairing map: each HPS Internal segment label -> the corresponding Market segment label.
+// Built using city-suffix logic (Cape, Indian, Melbo, Merrit, Sate) for cities that have suffixed
+// Market variants, falling back to the generic combined section otherwise.
+const HPS_TO_MARKET = {
+  "5BR+ Houses All Major Markets":    "5BR+ Houses All Major Markets",
+  "Portfolio All Units":              "Portfolio All Units",
+  "Houses Other Markets":             "Houses Other Markets",
+  "Cape Canaveral 2BR Condo":         "Condos 3 Cities Combined 2BR",
+  "Cape Canaveral 3BR Condo":         "Condos 3 Cities Combined 3BR (Cape)",
+  "Cape Canaveral 2BR House":         "Houses 5 Cities Combined 2BR (Cape)",
+  "Cape Canaveral 3BR House":         "Houses 5 Cities Combined 3BR (Cape)",
+  "Cape Canaveral 4BR House":         "Houses 5 Cities Combined 4BR (Cape)",
+  "Cocoa Beach 2BR Condo":            "Condos 3 Cities Combined 2BR",
+  "Cocoa Beach 3BR Condo":            "Condos 3 Cities Combined 3BR",
+  "Cocoa Beach 2BR House":            "Houses 5 Cities Combined 2BR",
+  "Cocoa Beach 3BR House":            "Houses 5 Cities Combined 3BR",
+  "Cocoa Beach 4BR House":            "Houses 5 Cities Combined 4BR",
+  "Indian Harbour Beach 2BR House":   "Houses 5 Cities Combined 2BR (Indian)",
+  "Indian Harbour Beach 3BR House":   "Houses 5 Cities Combined 3BR (Indian)",
+  "Indian Harbour Beach 4BR House":   "Houses 5 Cities Combined 4BR (Indian)",
+  "Melbourne Beach 2BR House":        "Houses 5 Cities Combined 2BR (Melbo)",
+  "Melbourne Beach 3BR House":        "Houses 5 Cities Combined 3BR (Melbo)",
+  "Melbourne Beach 4BR House":        "Houses 5 Cities Combined 4BR (Melbo)",
+  "Merritt Island 2BR House":         "Houses 5 Cities Combined 2BR (Merrit)",
+  "Merritt Island 3BR House":         "Houses 5 Cities Combined 3BR (Merrit)",
+  "Merritt Island 4BR House":         "Houses 5 Cities Combined 4BR (Merrit)",
+  "Satellite Beach 2BR Condo":        "Condos 3 Cities Combined 2BR (Sate)",
+  "Satellite Beach 3BR Condo":        "Condos 3 Cities Combined 3BR (Sate)"
+};
+
+let COMPARE_FILTER = null;  // active drill-down filter: {metric: 'ADR'|'Occ'|'RevPAR'|'LoS', sign: 'pos'|'neg'}
+
+function buildComparisonRows(w) {
+  // For each HPS Internal segment, compute the gap to its paired Market segment, per metric.
+  const rows = [];
+  for (const [hpsLabel, mktLabel] of Object.entries(HPS_TO_MARKET)) {
+    const hps = DATA.segments.find(s => s.family === 'Internal' && s.label === hpsLabel);
+    const mkt = DATA.segments.find(s => s.family === 'Market'   && s.label === mktLabel);
+    if (!hps || !mkt) continue;
+    const isExact = hpsLabel === mktLabel;
+    const row = { hpsLabel, mktLabel, isExact, hps, mkt, gaps: {} };
+    for (const m of ['ADR','Occ','RevPAR','LoS']) {
+      const hVal = hps[`${w}_${m}_2026`];
+      const mVal = mkt[`${w}_${m}_2026`];
+      if (hVal == null || mVal == null) {
+        row.gaps[m] = { hVal, mVal, pct: null, pp: null, status: 'na' };
+        continue;
+      }
+      // For Occupancy, use percentage-point difference as primary, multiplier as secondary
+      let pct = null, pp = null;
+      if (mVal !== 0) pct = (hVal - mVal) / mVal * 100;
+      if (m === 'Occ') pp = hVal - mVal;
+      // For LoS, lower bound logic still works on percentages
+      // status: 'pos' = HPS ahead, 'neg' = HPS behind, 'neu' = within ~3% threshold
+      let status = 'neu';
+      const threshold = m === 'Occ' ? 1.5 : 3;  // occupancy uses pp threshold
+      const compareVal = m === 'Occ' ? pp : pct;
+      if (compareVal != null) {
+        if (compareVal > threshold)      status = 'pos';
+        else if (compareVal < -threshold) status = 'neg';
+      }
+      row.gaps[m] = { hVal, mVal, pct, pp, status };
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+
 function renderCompare() {
   const w = STATE.window;
   const sort = document.getElementById('compare-sort').value;
-  // For each segment that has BOTH Internal and Market data, build a comparison.
-  // For Market-only sections (most combined ones), find the corresponding Internal segment by label.
-  const items = [];
-  DATA.segments.filter(s => s.family === 'Market').forEach(mSeg => {
-    const iSeg = DATA.segments.find(s => s.family === 'Internal' && s.label === mSeg.label);
-    if (!iSeg) return;
-    const iADR = iSeg[`${w}_ADR_2026`], mADR = mSeg[`${w}_ADR_2026`];
-    const iOcc = iSeg[`${w}_Occ_2026`], mOcc = mSeg[`${w}_Occ_2026`];
-    const iRev = iSeg[`${w}_RevPAR_2026`], mRev = mSeg[`${w}_RevPAR_2026`];
-    const iLos = iSeg[`${w}_LoS_2026`], mLos = mSeg[`${w}_LoS_2026`];
-    if (iADR == null || mADR == null) return;
-    const adrGap = mADR > 0 ? (iADR - mADR)/mADR*100 : null;
-    const occGap = mOcc > 0 ? (iOcc - mOcc)/mOcc*100 : null;
-    const occGapPP = (iOcc != null && mOcc != null) ? (iOcc - mOcc) : null;
-    const revGap = mRev > 0 ? (iRev - mRev)/mRev*100 : null;
-    const losGap = mLos > 0 ? (iLos - mLos)/mLos*100 : null;
-    items.push({seg: mSeg, iADR, mADR, iOcc, mOcc, iRev, mRev, iLos, mLos, adrGap, occGap, occGapPP, revGap, losGap});
-  });
-  // Sort
-  if (sort === 'opportunity') {
-    items.sort((a,b) => (a.revGap == null ? -999 : a.revGap) - (b.revGap == null ? -999 : b.revGap));
-  } else if (sort === 'win') {
-    items.sort((a,b) => (b.revGap == null ? -999 : b.revGap) - (a.revGap == null ? -999 : a.revGap));
-  } else {
-    items.sort((a,b) => a.seg.label.localeCompare(b.seg.label));
+  const search = (document.getElementById('compare-search').value || '').toLowerCase();
+  const winLabel = w === 'fy' ? 'Full Year' : 'Next 90 Days';
+
+  let rows = buildComparisonRows(w);
+
+  // === Summary header (computed on ALL rows, ignoring active drill-down filter and search) ===
+  const totalCount = rows.length;
+  const summary = {};
+  for (const m of ['ADR','Occ','RevPAR','LoS']) {
+    summary[m] = { pos: 0, neg: 0, neu: 0, na: 0 };
+    for (const r of rows) {
+      summary[m][r.gaps[m].status]++;
+    }
   }
-  document.getElementById('compare-cards').innerHTML = items.map(i => buildCompareCard(i, w)).join('');
+  renderCompareSummary(summary, totalCount, w);
+
+  // === Apply active drill-down filter (from clicking a summary stat) ===
+  if (COMPARE_FILTER) {
+    rows = rows.filter(r => r.gaps[COMPARE_FILTER.metric].status === COMPARE_FILTER.sign);
+    const banner = document.getElementById('compare-filter-banner');
+    const label = document.getElementById('compare-filter-label');
+    const human = COMPARE_FILTER.sign === 'pos' ? 'ahead of'
+                : COMPARE_FILTER.sign === 'neg' ? 'behind'
+                : 'tracking';
+    label.innerHTML = `Filtered to segments where HPS is <b>${human}</b> the market on <b>${COMPARE_FILTER.metric}</b> (${rows.length} of ${totalCount})`;
+    banner.classList.add('shown');
+  } else {
+    document.getElementById('compare-filter-banner').classList.remove('shown');
+  }
+
+  // === Apply text search ===
+  if (search) {
+    rows = rows.filter(r => r.hpsLabel.toLowerCase().includes(search));
+  }
+
+  // === Sort ===
+  const valForSort = (r, m) => {
+    const g = r.gaps[m];
+    if (g.status === 'na') return null;
+    return m === 'Occ' ? g.pp : g.pct;
+  };
+  if (sort === 'revpar-best') {
+    rows.sort((a,b) => (valForSort(b,'RevPAR') ?? -Infinity) - (valForSort(a,'RevPAR') ?? -Infinity));
+  } else if (sort === 'revpar-worst') {
+    rows.sort((a,b) => (valForSort(a,'RevPAR') ?? Infinity) - (valForSort(b,'RevPAR') ?? Infinity));
+  } else if (sort === 'occ-best') {
+    rows.sort((a,b) => (valForSort(b,'Occ') ?? -Infinity) - (valForSort(a,'Occ') ?? -Infinity));
+  } else {
+    rows.sort((a,b) => a.hpsLabel.localeCompare(b.hpsLabel));
+  }
+
+  // === Render rows ===
+  document.getElementById('compare-note').textContent =
+    `Where HPS beats or trails the comp set, by segment · ${winLabel}`;
+  document.getElementById('scorecard-body').innerHTML = rows.length
+    ? rows.map(r => buildScorecardRow(r, w)).join('')
+    : `<div style="padding: 24px; color: var(--ink-faint); font-size: 13px; text-align: center;">No segments match the current filter.</div>`;
 }
 
-function buildCompareCard(i, w) {
-  const fmtGap = (val, isOcc, isOccMult) => {
-    if (val == null) return '<span class="gap neu">—</span>';
-    if (isOcc && isOccMult != null && Math.abs(isOccMult) > 50) {
-      const mult = i.iOcc / i.mOcc;
-      return `<span class="gap pos">${mult.toFixed(1)}× market</span>`;
-    }
-    if (isOcc) {
-      const sign = val > 0 ? '+' : '';
-      const cls = val > 3 ? 'pos' : val < -3 ? 'neg' : 'neu';
-      return `<span class="gap ${cls}">${sign}${val.toFixed(1)}pp</span>`;
-    }
-    const sign = val > 0 ? '+' : '';
-    const cls = val > 5 ? 'pos' : val < -5 ? 'neg' : 'neu';
-    return `<span class="gap ${cls}">${sign}${val.toFixed(0)}%</span>`;
+function renderCompareSummary(summary, total, w) {
+  const el = document.getElementById('compare-summary');
+  const winLabel = w === 'fy' ? 'Full Year' : 'Next 90 Days';
+
+  const metricCard = (metricKey, displayLabel) => {
+    const s = summary[metricKey];
+    const comparable = s.pos + s.neg + s.neu;
+    const valClass = s.pos > s.neg ? 'pos' : s.neg > s.pos ? 'neg' : '';
+    const headlineWord = s.pos > s.neg ? 'ahead' : s.neg > s.pos ? 'behind' : 'split';
+    const headlineCount = s.pos > s.neg ? s.pos : s.neg > s.pos ? s.neg : s.neu;
+    const isActive = (sign) => COMPARE_FILTER && COMPARE_FILTER.metric === metricKey && COMPARE_FILTER.sign === sign;
+    return `
+      <div>
+        <div class="stat ${isActive('pos') ? 'active' : ''}" data-metric="${metricKey}" data-sign="pos">
+          <div class="stat-label">${displayLabel} · HPS ahead</div>
+          <div class="stat-val ${s.pos > 0 ? 'pos' : ''}">${s.pos}<span style="font-size: 14px; color: var(--ink-soft); font-weight: 400;"> of ${comparable}</span></div>
+          <div class="stat-sub">click to filter</div>
+        </div>
+        <div class="stat ${isActive('neg') ? 'active' : ''}" data-metric="${metricKey}" data-sign="neg" style="margin-top: 6px;">
+          <div class="stat-label">${displayLabel} · HPS behind</div>
+          <div class="stat-val ${s.neg > 0 ? 'neg' : ''}">${s.neg}<span style="font-size: 14px; color: var(--ink-soft); font-weight: 400;"> of ${comparable}</span></div>
+          <div class="stat-sub">click to filter</div>
+        </div>
+      </div>`;
   };
-  const read = readForSeg(i);
+
+  // Build a one-line narrative based on whichever direction dominates RevPAR
+  const r = summary.RevPAR;
+  const revComp = r.pos + r.neg + r.neu;
+  const narrative = r.pos > r.neg
+    ? `<b>HPS earns more RevPAR than the comp set in ${r.pos} of ${revComp} comparable segments</b> (${winLabel}). The portfolio is broadly outperforming the market on the bottom-line metric.`
+    : r.neg > r.pos
+    ? `<b>HPS trails the comp set on RevPAR in ${r.neg} of ${revComp} comparable segments</b> (${winLabel}). Multiple segments are leaving revenue on the table relative to the market.`
+    : `HPS RevPAR tracks the comp set evenly across segments (${winLabel}). No dominant direction.`;
+
+  el.innerHTML = `
+    <div class="summary-h">Scorecard summary · ${winLabel} · ${total} segments comparable</div>
+    <div class="summary-grid">
+      ${metricCard('ADR',    'ADR')}
+      ${metricCard('Occ',    'Occupancy')}
+      ${metricCard('RevPAR', 'RevPAR')}
+      ${metricCard('LoS',    'Length of Stay')}
+    </div>
+    <div class="summary-narrative">${narrative}</div>
+  `;
+
+  // Bind click handlers on the stat tiles
+  el.querySelectorAll('.stat[data-metric]').forEach(tile => {
+    tile.onclick = () => {
+      const metric = tile.dataset.metric;
+      const sign = tile.dataset.sign;
+      // Toggle: clicking active filter clears it
+      if (COMPARE_FILTER && COMPARE_FILTER.metric === metric && COMPARE_FILTER.sign === sign) {
+        COMPARE_FILTER = null;
+      } else {
+        COMPARE_FILTER = { metric, sign };
+      }
+      renderCompare();
+    };
+  });
+}
+
+function buildScorecardRow(row, w) {
+  const cell = (m) => {
+    const g = row.gaps[m];
+    if (g.status === 'na') {
+      return `<div class="scorecard-cell neu"><div class="gap-val">—</div><div class="gap-detail">no data</div></div>`;
+    }
+    // Build the gap headline
+    let headline;
+    if (m === 'Occ') {
+      // Occupancy: prefer pp difference. If big, show multiplier instead.
+      if (g.mVal > 0 && g.hVal / g.mVal >= 1.8 && g.mVal >= 3) {
+        headline = `${(g.hVal / g.mVal).toFixed(1)}× market`;
+      } else {
+        const sign = g.pp > 0 ? '+' : '';
+        headline = `${sign}${g.pp.toFixed(1)}pp`;
+      }
+    } else {
+      if (g.pct == null) {
+        headline = '—';
+      } else {
+        const sign = g.pct > 0 ? '+' : '';
+        headline = `${sign}${g.pct.toFixed(0)}%`;
+      }
+    }
+    const arrow = g.status === 'pos' ? '▲' : g.status === 'neg' ? '▼' : '–';
+    return `<div class="scorecard-cell ${g.status}">
+      <div class="gap-val">${arrow} ${headline}</div>
+      <div class="gap-detail">HPS ${formatVal(g.hVal, m)} vs ${formatVal(g.mVal, m)}</div>
+    </div>`;
+  };
+  const comparedTo = row.isExact ? '' :
+    `<div class="seg-compared">vs ${row.mktLabel}</div>`;
+  const tag = row.isExact ? `<span class="seg-tag">exact match</span>` : '';
   return `
-    <div class="compare-card">
-      <div class="compare-card-head">
-        <span class="title">${i.seg.label}</span>
-        <span class="sub">${w === 'fy' ? 'Full Year' : 'Next 90 Days'}</span>
+    <div class="scorecard-row">
+      <div class="seg-cell">
+        <div class="seg-name">${row.hpsLabel}${tag}</div>
+        ${comparedTo}
       </div>
-      <div class="compare-grid">
-        <div></div>
-        <div class="h-row" style="text-align:center;">HPS</div>
-        <div class="h-row" style="text-align:center;">Market</div>
-        <div class="h-row" style="text-align:center;">Gap</div>
-
-        <div class="metric-label">ADR</div>
-        <div class="val" style="text-align:center;">${fmtMoney(i.iADR)}</div>
-        <div class="val" style="text-align:center;">${fmtMoney(i.mADR)}</div>
-        <div style="text-align:center;">${fmtGap(i.adrGap, false)}</div>
-
-        <div class="metric-label">Occupancy</div>
-        <div class="val" style="text-align:center;">${fmtPct(i.iOcc)}</div>
-        <div class="val" style="text-align:center;">${fmtPct(i.mOcc)}</div>
-        <div style="text-align:center;">${fmtGap(i.occGapPP, true, i.occGap)}</div>
-
-        <div class="metric-label">RevPAR</div>
-        <div class="val" style="text-align:center;">${fmtMoney(i.iRev)}</div>
-        <div class="val" style="text-align:center;">${fmtMoney(i.mRev)}</div>
-        <div style="text-align:center;">${fmtGap(i.revGap, false)}</div>
-
-        <div class="metric-label">Length of Stay</div>
-        <div class="val" style="text-align:center;">${fmtLos(i.iLos)}</div>
-        <div class="val" style="text-align:center;">${fmtLos(i.mLos)}</div>
-        <div style="text-align:center;">${fmtGap(i.losGap, false)}</div>
-      </div>
-      <div class="read-line"><b>Read:</b> ${read}</div>
+      ${cell('ADR')}
+      ${cell('Occ')}
+      ${cell('RevPAR')}
+      ${cell('LoS')}
     </div>
   `;
 }
 
-function readForSeg(i) {
-  const adr = i.iADR, mAdr = i.mADR, occ = i.iOcc, mOcc = i.mOcc, rev = i.iRev, mRev = i.mRev;
-  if (adr == null || mAdr == null || occ == null || mOcc == null) {
-    return "Insufficient data for this segment in the current pull.";
-  }
-  if (mAdr == 0 || mOcc == 0 || mRev == null || mRev == 0) {
-    return `HPS holds ADR ${fmtMoney(adr)} and ${occ.toFixed(1)}% occupancy. Market comparison unavailable; comp set near-zero activity.`;
-  }
-  const adrGap = (adr - mAdr)/mAdr * 100;
-  const occGapPP = occ - mOcc;
-  const occMult = mOcc > 0 ? occ / mOcc : null;
-  const revGap = mRev > 0 ? (rev - mRev)/mRev * 100 : null;
-  const below = adrGap < -5, above = adrGap > 5;
-  const fillsMore = occGapPP > 3, fillsLess = occGapPP < -3;
-  const winsRev = revGap != null && revGap > 10;
-  const losesRev = revGap != null && revGap < -10;
-
-  if (below && fillsMore && winsRev) {
-    if (occMult && occMult >= 1.5) {
-      return `HPS prices ${Math.abs(adrGap).toFixed(0)}% below the comp set but fills ${occMult.toFixed(1)} times the occupancy, earning ${revGap > 0 ? '+' : ''}${revGap.toFixed(0)}% more revenue per available night. The trade rate for volume play is working.`;
-    }
-    return `HPS prices ${Math.abs(adrGap).toFixed(0)}% below market with occupancy ${occGapPP > 0 ? '+' : ''}${occGapPP.toFixed(1)}pp higher. Net effect on RevPAR is ${revGap > 0 ? '+' : ''}${revGap.toFixed(0)}%, so the discount is more than paying for itself.`;
-  }
-  if (above && fillsMore && winsRev) {
-    return `HPS prices ${adrGap.toFixed(0)}% above market and still fills more nights (${occGapPP > 0 ? '+' : ''}${occGapPP.toFixed(1)}pp). Premium positioning is intact and earning ${revGap > 0 ? '+' : ''}${revGap.toFixed(0)}% more RevPAR. Hold or test small lifts.`;
-  }
-  if (above && fillsLess && losesRev) {
-    return `HPS prices ${adrGap.toFixed(0)}% above market but occupancy lags by ${Math.abs(occGapPP).toFixed(1)}pp. RevPAR is ${revGap.toFixed(0)}% behind. Likely overpriced for what the segment will bear; consider testing rate cuts.`;
-  }
-  if (above && fillsLess && !losesRev) {
-    return `HPS prices ${adrGap.toFixed(0)}% above market with occupancy down ${Math.abs(occGapPP).toFixed(1)}pp, but RevPAR is roughly even (${revGap > 0 ? '+' : ''}${revGap.toFixed(0)}%). The premium covers the volume gap for now; monitor closely.`;
-  }
-  if (below && fillsLess) {
-    return `HPS prices ${Math.abs(adrGap).toFixed(0)}% below market and occupancy is also lower by ${Math.abs(occGapPP).toFixed(1)}pp. Pricing isn't the constraint; look at listing quality, photos, or seasonality for this segment.`;
-  }
-  // New case: discounting without occupancy payoff (parity occupancy, big rate discount)
-  if (below && !fillsMore && losesRev) {
-    return `HPS prices ${Math.abs(adrGap).toFixed(0)}% below market but occupancy only matches the comp set (${occGapPP > 0 ? '+' : ''}${occGapPP.toFixed(1)}pp). The discount isn't buying any extra fill, so RevPAR falls ${revGap.toFixed(0)}% behind. Consider raising rates back toward market.`;
-  }
-  if (below && fillsMore && !winsRev) {
-    return `HPS prices ${Math.abs(adrGap).toFixed(0)}% below market and fills ${occGapPP > 0 ? '+' : ''}${occGapPP.toFixed(1)}pp more nights, but the discount eats into RevPAR (${revGap > 0 ? '+' : ''}${revGap.toFixed(0)}%). Possibly leaving money on the table; test selective rate increases.`;
-  }
-  if (Math.abs(adrGap) < 5 && Math.abs(occGapPP) < 3) {
-    return `HPS tracks closely with the comp set on both rate and occupancy. RevPAR runs ${revGap > 0 ? '+' : ''}${revGap != null ? revGap.toFixed(0)+'%' : 'flat'}. Steady alignment; nothing actionable right now.`;
-  }
-  if (fillsMore && !below && !above) {
-    return `Prices roughly match the market but HPS fills ${occGapPP > 0 ? '+' : ''}${occGapPP.toFixed(1)}pp more, earning ${revGap > 0 ? '+' : ''}${revGap != null ? revGap.toFixed(0)+'%' : 'unclear'}% RevPAR. Outperforming on demand capture at parity pricing.`;
-  }
-  // Fallback
-  const parts = [];
-  if (below) parts.push(`prices ${Math.abs(adrGap).toFixed(0)}% below market`);
-  else if (above) parts.push(`prices ${adrGap.toFixed(0)}% above market`);
-  if (fillsMore) parts.push(`fills ${occGapPP > 0 ? '+' : ''}${occGapPP.toFixed(1)}pp more nights`);
-  else if (fillsLess) parts.push(`fills ${Math.abs(occGapPP).toFixed(1)}pp fewer nights`);
-  const joined = parts.length ? `HPS ${parts.join(' and ')}` : `HPS tracks the comp set`;
-  const revStr = revGap != null ? `RevPAR is ${revGap > 0 ? '+' : ''}${revGap.toFixed(0)}% vs market` : 'RevPAR gap unclear';
-  return `${joined}. ${revStr}.`;
+function formatVal(v, m) {
+  if (v == null) return '—';
+  if (m === 'ADR' || m === 'RevPAR') return '$' + Math.round(v).toLocaleString();
+  if (m === 'Occ') return v.toFixed(1) + '%';
+  if (m === 'LoS') return v.toFixed(1) + ' nts';
+  return v;
 }
 
 document.getElementById('compare-sort').addEventListener('change', renderCompare);
+document.getElementById('compare-search').addEventListener('input', renderCompare);
+document.getElementById('compare-filter-clear').addEventListener('click', () => {
+  COMPARE_FILTER = null;
+  renderCompare();
+});
 
 // Initial render
 render();
